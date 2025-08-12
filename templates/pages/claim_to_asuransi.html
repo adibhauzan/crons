@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Laporan Klaim Asuransi</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #000;
+    background-color: #fff;
+    margin: 0;
+    padding: 20px;
+  }
+  .container {
+    max-width: 700px;
+    margin: auto;
+  }
+  .header {
+    margin-bottom: 20px;
+  }
+  .header p {
+    margin: 4px 0;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 15px 0;
+  }
+  th, td {
+    border: 1px solid #000;
+    padding: 6px;
+    text-align: left;
+  }
+  th {
+    background-color: #f2f2f2;
+  }
+  .footer {
+    margin-top: 20px;
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <p>{{.HariIni }}</p>
+      <p>Kepada Yth.</p>
+      <p>{{ .Asuransi }}</p>
+    </div>
+
+    <p><strong>Perihal :</strong> Laporan Klaim Asuransi {{ .InsuranceProduct }}</p>
+
+    <p>Dengan hormat,</p>
+
+    <p>Bersama ini kami sampaikan Laporan Klaim Asuransi {{ .InsuranceProduct }} dengan data sebagai berikut:</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>No.</th>
+          <th>Nama Tertanggung / Debitur</th>
+          <th>No. Polis / KPAJK / KPAK</th>
+          <th>Tanggal Musibah</th>
+          <th>Tanggal Lapor</th>
+          <th>Periode Pertanggungan</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{ range $index, $data := .Data }}
+        <tr>
+          <td>{{ add $index 1 }}</td>
+          <td>{{ $data.NamaTertanggung }}</td>
+          <td>{{ $data.NoPolicies }}</td>
+          <td>{{ $data.TanggalMusibah }}</td>
+          <td>{{ $data.TanggalLapor }}</td>
+          <td>{{ $data.PeriodePertanggungan }}</td>
+        </tr>
+         {{ end }}
+      </tbody>
+    </table>
+
+    <p>Adapun kelengkapan dokumen pendukung klaim akan kami sampaikan kemudian dan sampai menunggu kelengkapan dokumen pendukung klaim tersebut, kiranya laporan klaim dimaksud dapat ditindaklanjuti pada kesempatan pertama.</p>
+
+    <p>Demikian kami sampaikan, atas perhatian dan kerjasamanya kami ucapkan terima kasih.</p>
+
+    <div class="footer">
+      <p><strong>PT. BINASENTRA PURNA</strong></p>
+      <p>INSURANCE BROKER</p>
+      <p>Claims & Services Department</p>
+    </div>
+  </div>
+</body>
+</html>

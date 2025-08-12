@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <title>Tanda Terima Laporan Klaim</title>
+    <style>
+        body {
+            font-family: Calibri, sans-serif;
+            font-size: 14px;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        .page {
+            width: 220mm;
+            min-height: 278mm;
+            margin: auto;
+            background: white;
+            box-sizing: border-box;
+            page-break-after: auto; /* ❌ Hindari always */
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .page:last-child {
+            page-break-after: avoid;
+        }
+
+        .wave-header {
+            width: 100%;
+            height: 80px;
+            overflow: hidden;
+        }
+
+        .wave-header svg {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
+        .container {
+            padding: 0 40px;
+        }
+
+        .header {
+            margin-top: -20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header img {
+            height: 50px;
+        }
+
+        .certificates {
+            display: flex;
+            align-items: center;
+        }
+
+        .certificates img {
+            height: 28px;
+            margin-left: 8px;
+        }
+
+        .title {
+            text-align: center;
+            font-weight: bold;
+            text-decoration: underline;
+            font-size: 16px;
+        }
+
+        .content {
+            margin-top: 10px;
+        }
+
+        .footer {
+            padding: 10px 20px;
+            margin-top: 60px;
+            font-size: 12px;
+        }
+        
+        .signature-section {
+            display: flex;
+            align-items: end;
+            justify-content: space-between;
+            line-height: normal;
+        }
+
+        .identity-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 10px;
+        }
+
+        .identity-table td {
+            padding: 4px;
+            vertical-align: top;
+        }
+
+        .identity-table td:nth-child(1) {
+            width: 30px;
+        }
+
+        .identity-table td:nth-child(2) {
+            width: 30%;
+            text-transform: uppercase;
+        }
+
+        .identity-table td:nth-child(3) {
+            width: 10px;
+        }
+
+        .identity-table td:nth-child(4) {
+            width: 60%;
+        }
+
+        .signature-section {
+            display: flex;
+            align-items: end;
+            justify-content: space-between;
+            margin-top: 60px;
+            line-height: normal;
+        }
+
+        .signature-box {
+            text-align: center;
+            width: 45%;
+        }
+
+        .signature-box .name {
+            margin-top: 100px;
+        }
+
+        .note {
+            margin-top: 20px;
+            font-size: 13px;
+        }
+
+        .note p {
+            margin-left: 12px;
+            line-height: normal;
+        }
+
+        .checklist-container {
+            margin-top: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            font-size: 13px;
+        }
+
+        .checklist-row {
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .checklist-box {
+            width: 15px;
+            height: 15px;
+            border: 1px solid black;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 8px;
+            font-size: 12px;
+        }
+
+        .checklist-label {
+            flex: 1;
+            line-height: normal;
+        }
+
+        .checklist-colon {
+            width: 12px;
+        }
+
+        .checklist-value {
+            width: 30%;
+        }
+
+        .garis-pembatas {
+            width: 100%;
+            height: 2px;
+            background-color: black;
+            margin-bottom: 6px;
+            margin-top: 20px;
+        }
+
+        .row-utama {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            font-size: 13px;
+        }
+
+        .kiri-kolom {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+        }
+
+        .checkbox-label div {
+            margin-right: 6px;
+        }
+
+        .checkbox-kotak {
+            width: 15px;
+            height: 15px;
+            border: 1px solid black;
+        }
+
+        .tanggal-row {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-left: 22px;
+        }
+
+        /* Print media style */
+        @media print {
+            .footer {
+                page-break-after: always;
+            }
+            /* .page {
+                border: none;
+                box-shadow: none;
+                page-break-after: always;
+            }
+            .page:last-child {
+                page-break-after: auto;
+            } */
+        }
+    </style>
+</head>
+
+<body>
+<!-- Page 1 -->
+<div class="page">
+    <div class="wave-header">
+        <svg viewBox="0 0 595 86" preserveAspectRatio="none">
+            <path
+                    d="M595 67C293 0 171.5 6 -0.000213623 25.2079C-171.501 44.4158 -0.000213623 0 -0.000213623 0H595C595 0 897 134 595 67Z"
+                    fill="#015bfd"
+            />
+            <path
+                    d="M593.5 69.5124C414 18.9998 190.746 -2.38509 0 29.0066V34.0052C190 -1.49714 425.5 22.236 593.5 69.5124Z"
+                    fill="#015bfd"
+            />
+        </svg>
+    </div>
+    <div class="container">
+        <div class="header">
+            <img src="bsp-payung-3.png" alt="Logo BSP" id="cert1" />
+            <div class="title">Tanda Terima Laporan Klaim</div>
+            <div class="certificates">
+                <img src="" alt="Cert 1" id="cert2" />
+                <img src="" alt="Cert 2" id="cert3" />
+                <img src="" alt="Cert 3" id="cert4" />
+                <img src="" alt="Cert 4" id="cert5" />
+            </div>
+        </div>
+        <div class="content">
+            <p>
+                Telah terima dari Bpk/Ibu {{ .NamaPelapor }} laporan Klaim {{
+                .ProdukAsuransi }}, pada hari {{ .HariIni}}, dengan data Peserta
+                dan lampiran dokumen persyaratan yang harus dilengkapi sebagai
+                berikut :
+            </p>
+            <table class="identity-table">
+                <tr>
+                    <td>1.</td>
+                    <td>Nama Debitur</td>
+                    <td>:</td>
+                    <td>{{ .NamaDebitur }}</td>
+                </tr>
+                <tr>
+                    <td>2.</td>
+                    <td>Tanggal Lahir</td>
+                    <td>:</td>
+                    <td>{{ .TanggalLahirDebitur }}</td>
+                </tr>
+                <tr>
+                    <td>3.</td>
+                    <td>Nomor Peserta</td>
+                    <td>:</td>
+                    <td>{{ .NomorPeserta }}</td>
+                </tr>
+                <tr>
+                    <td>4.</td>
+                    <td>Tanggal Realisasi</td>
+                    <td>:</td>
+                    <td>{{ .TanggalRealisasi }}</td>
+                </tr>
+                <tr>
+                    <td>5.</td>
+                    <td>Tanggal Musibah</td>
+                    <td>:</td>
+                    <td>{{ .TanggalMusibah }}</td>
+                </tr>
+                <tr>
+                    <td>6.</td>
+                    <td>Alamat (Debitur/Ahli Waris)</td>
+                    <td>:</td>
+                    <td>{{ .AlamatDebitur }}</td>
+                </tr>
+                <tr>
+                    <td>7.</td>
+                    <td>Nomor Telepon</td>
+                    <td>:</td>
+                    <td>{{ .NomorTeleponDebitur }}</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="footer">
+            <div class="signature-section">
+                <div class="signature-box">
+                    <p>Pelapor</p>
+                    <p class="name">( {{ .NamaPelapor }} )</p>
+                </div>
+                <div class="signature-box">
+                    <p>
+                        {{ .UPB }}, {{ .TanggalIni }}<br />{{ .CompanyName }}<br />{{ .CompanyPrintName
+                        }}<br />Penerima
+                    </p>
+                    <p class="name">( .................... )</p>
+                </div>
+            </div>
+
+            <div class="note">
+                <p>
+                    Apabila dokumen yang diserahkan belum lengkap, maka seluruh
+                    dokumen yang dibawa saat ini hanya akan didokumentasikan via
+                    softcopy (scan) dan dokumen fisiknya kami kembalikan kepada pihak
+                    tertanggung/ahli waris/pemegang polis. Klaim hanya akan diproses
+                    bilamana seluruh persyaratan dokumen telah dilengkapi dan kami
+                    terima.
+                </p>
+                <p>Saya sebagai pelapor menyatakan bahwa seap dokumen klaim yang saya sampaikan adalah dokumen yang sebenarnya dan dapat dipertanggungjawabkan secara hukum.</p>
+                <div>
+                    <p>
+                        * Pengurusan Klaim Asuransi melalui {{ .CompanyName }} {{ .CompanyPrintName }} tidak
+                        dipungut biaya. Jika terdapat pihak yang mengatas namakan
+                        karyawan kami dan meminta imbalan dalam proses pengurusan klaim,
+                        mohon segera laporkan ke Claims & Services Department Kantor
+                        Pusat melalui:
+                    </p>
+                    <p>Telepon : (021) 22323915</p>
+                    <p>Email: wbs@binasentra.co.id</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Page 2 -->
+<div class="page">
+    <div class="wave-header">
+        <svg viewBox="0 0 595 86" preserveAspectRatio="none">
+            <path
+                    d="M595 67C293 0 171.5 6 -0.000213623 25.2079C-171.501 44.4158 -0.000213623 0 -0.000213623 0H595C595 0 897 134 595 67Z"
+                    fill="#015bfd"
+            />
+            <path
+                    d="M593.5 69.5124C414 18.9998 190.746 -2.38509 0 29.0066V34.0052C190 -1.49714 425.5 22.236 593.5 69.5124Z"
+                    fill="#015bfd"
+            />
+        </svg>
+    </div>
+    <div class="container">
+        <div class="header">
+            <img src="bsp-payung-3.png" alt="Logo BSP" id="cert1_2" />
+            <div class="title">Tanda Terima Laporan Klaim</div>
+            <div class="certificates">
+                <img src="" alt="Cert 1" id="cert2_2" />
+                <img src="" alt="Cert 2" id="cert3_2" />
+                <img src="" alt="Cert 3" id="cert4_2" />
+                <img src="" alt="Cert 4" id="cert5_2" />
+            </div>
+        </div>
+        <div class="content">
+            <p>
+                Telah terima dari Bpk/Ibu {{ .NamaPelapor }} laporan Klaim {{
+                .ProdukAsuransi }}, pada hari {{ .HariIni}}, dengan data Peserta
+                dan lampiran dokumen persyaratan yang harus dilengkapi sebagai
+                berikut :
+            </p>
+            <table class="identity-table">
+                <tr>
+                    <td>1.</td>
+                    <td>Nama Debitur</td>
+                    <td>:</td>
+                    <td>{{ .NamaDebitur }}</td>
+                </tr>
+                <tr>
+                    <td>2.</td>
+                    <td>Tanggal Lahir</td>
+                    <td>:</td>
+                    <td>{{ .TanggalLahirDebitur }}</td>
+                </tr>
+                <tr>
+                    <td>3.</td>
+                    <td>Nomor Peserta</td>
+                    <td>:</td>
+                    <td>{{ .NomorPeserta }}</td>
+                </tr>
+                <tr>
+                    <td>4.</td>
+                    <td>Tanggal Realisasi</td>
+                    <td>:</td>
+                    <td>{{ .TanggalRealisasi }}</td>
+                </tr>
+                <tr>
+                    <td>5.</td>
+                    <td>Tanggal Musibah</td>
+                    <td>:</td>
+                    <td>{{ .TanggalMusibah }}</td>
+                </tr>
+                <tr>
+                    <td>6.</td>
+                    <td>Alamat (Debitur/Ahli Waris)</td>
+                    <td>:</td>
+                    <td>{{ .AlamatDebitur }}</td>
+                </tr>
+                <tr>
+                    <td>7.</td>
+                    <td>Nomor Telepon</td>
+                    <td>:</td>
+                    <td>{{ .NomorTeleponDebitur }}</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="footer">
+            <div class="signature-section">
+                <div class="signature-box">
+                    <p>Pelapor</p>
+                    <p class="name">( {{ .NamaPelapor }} )</p>
+                </div>
+                <div class="signature-box">
+                    <p>
+                        {{ .UPB }}, {{ .TanggalIni }}<br />{{ .CompanyName }}<br />{{ .CompanyPrintName
+                        }}<br />Penerima
+                    </p>
+                    <p class="name">( .................... )</p>
+                </div>
+            </div>
+
+            <div class="note">
+                <p>
+                    Apabila dokumen yang diserahkan belum lengkap, maka seluruh
+                    dokumen yang dibawa saat ini hanya akan didokumentasikan via
+                    softcopy (scan) dan dokumen fisiknya kami kembalikan kepada pihak
+                    tertanggung/ahli waris/pemegang polis. Klaim hanya akan diproses
+                    bilamana seluruh persyaratan dokumen telah dilengkapi dan kami
+                    terima.
+                </p>
+                <p>Saya sebagai pelapor menyatakan bahwa seap dokumen klaim yang saya sampaikan adalah dokumen yang sebenarnya dan dapat dipertanggungjawabkan secara hukum.</p>
+                <div>
+                    <p>
+                        * Pengurusan Klaim Asuransi melalui {{ .CompanyName }} {{ .CompanyPrintName }} tidak
+                        dipungut biaya. Jika terdapat pihak yang mengatas namakan
+                        karyawan kami dan meminta imbalan dalam proses pengurusan klaim,
+                        mohon segera laporkan ke Claims & Services Department Kantor
+                        Pusat melalui:
+                    </p>
+                    <p>Telepon : (021) 22323915</p>
+                    <p>Email: wbs@binasentra.co.id</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Page 3 (Checklist) -->
+<div class="page">
+    <div class="container" style="padding-top: 30px">
+        <div
+                style="
+            text-align: center;
+            font-weight: bold;
+            text-decoration: underline;
+            margin-bottom: 10px;
+          "
+        >
+            Check List Klaim {{ .ProdukAsuransi }}
+        </div>
+
+        <div
+                style="
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            font-size: 13px;
+          "
+        >
+            <div style="display: flex">
+                <div style="width: 200px">Nama Debitur</div>
+                <div style="width: 10px">:</div>
+                <div style="flex: 1">{{ .NamaDebitur }}</div>
+            </div>
+            <div style="display: flex">
+                <div style="width: 200px">Debitur Bank KPR Cabang</div>
+                <div style="width: 10px">:</div>
+                <div style="flex: 1">{{ .KodeUPB }} – {{ .UPB }}</div>
+            </div>
+            <div style="display: flex">
+                <div style="width: 200px">Tanggal Masuk Dokumen</div>
+                <div style="width: 10px">:</div>
+                <div style="flex: 1">{{ .TanggalTransaksi }}</div>
+            </div>
+        </div>
+        <div
+                style="
+            margin-top: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            font-size: 13px;
+          "
+        >
+            <div class="checklist-container">
+                {{ range $index, $item := .Documents }}
+                <div class="checklist-row">
+                    {{ if or $item.Link $item.Link }}
+                    <div class="checklist-box">✓</div>
+                    {{ else }}
+                    <div class="checklist-box"></div>
+                    {{ end }}
+                    <div class="checklist-label">{{ $item.Name }}</div>
+                    <div class="checklist-colon">:</div>
+                    <div class="checklist-value">{{ $item.Description }}</div>
+                </div>
+                {{ end }}
+            </div>
+        </div>
+        <div class="garis-pembatas"></div>
+
+        <div style="font-size: 13px">
+            <strong>Catatan :</strong>
+            <div class="row-utama">
+                <div class="kiri-kolom">
+                    <div class="checkbox-label">
+                        <div class="checkbox-kotak"></div>
+                        <div>Data Lengkap</div>
+                    </div>
+                    <div class="tanggal-row">
+                        <div>Tanggal Terima Dokumen Lengkap</div>
+                        <div>:</div>
+                    </div>
+                </div>
+                <div style="border-bottom: 1px solid black; width: 250px"></div>
+            </div>
+
+            <div
+                    style="
+              display: flex;
+              gap: 4px;
+              align-items: flex-start;
+              margin-top: 8px;
+            "
+            >
+                <div
+                        style="
+                width: 15px;
+                height: 15px;
+                border: 1px solid black;
+                margin-right: 6px;
+              "
+                ></div>
+                <div style="flex: 1">
+                    <div>Data Tidak Lengkap</div>
+                    <div
+                            style="
+                  border: 1px solid #000;
+                  min-height: 60px;
+                  padding: 5px;
+                  margin-top: 4px;
+                "
+                    >
+                        Catatan Perbedaan Data :
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-top: 10px; margin-bottom: 20px; line-height: normal">
+                Kiranya dokumen persyaratan klaim dimaksud dapat kami terima dalam
+                waktu yang tidak terlalu lama. Demikian kami sampaikan, atas
+                perhatian dan kerjasamanya kami ucapkan terima kasih.
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const certs = {
+        cert1: {{ .Certificate1 }},
+    cert2: {{ .Certificate2 }},
+    cert3: {{ .Certificate3 }},
+    cert4: {{ .Certificate4 }},
+    cert5: {{ .Certificate5 }},
+    cert1_2: {{ .Certificate1 }},
+    cert2_2: {{ .Certificate2 }},
+    cert3_2: {{ .Certificate3 }},
+    cert4_2: {{ .Certificate4 }},
+    cert5_2: {{ .Certificate5 }},
+    };
+    for (const id in certs) {
+        const el = document.getElementById(id);
+        if (el) el.src = certs[id];
+    }
+</script>
+</body>
+</html>

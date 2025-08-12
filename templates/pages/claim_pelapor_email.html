@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Email Klaim</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    color: #000;
+    line-height: 1.6;
+    margin: 0;
+    padding: 20px;
+    background-color: #ffffff;
+  }
+  p {
+    margin: 10px 0;
+  }
+  a {
+    color: #1a73e8;
+    text-decoration: none;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+
+  /* Tambahan untuk tanda tangan */
+  .signature p {
+    margin-top: 30px;
+    margin-bottom: 0;
+  }
+</style>
+</head>
+<body>
+
+<p>Yth. Bapak/Ibu {{ .NamaPelapor }}</p>
+
+<p>Dengan hormat,</p>
+
+<p>Terima kasih kami ucapkan atas dukungan dan kerjasamanya karena telah menggunakan jasa PT.Binasentra Purna Insurance Broker sebagai Konsultan & Pialang Asuransi bapak/ibu.<br />
+Kami turut berduka cita atas musibah yang bapak/ibu alami pada tanggal {{ .TanggalMusibah }}.</p>
+
+<p>Menindaklanjuti permohonan pengajuan klaim {{ .ProdukAsuransi }} atas nama {{ .NamaDebitur }}, bersama ini kami sampaikan konfirmasi mengenai dokumen persyaratan yang perlu dilengkapi untuk proses pengajuan klaim.</p>
+
+<p>Mohon dapat melengkapi dokumen-dokumen tersebut dan menyerahkan kepada kami agar klaim dapat ditindaklanjuti.</p>
+
+<p>Apabila Bapak/Ibu {{ .NamaDebitur }} memerlukan bantuan lebih lanjut atau memiliki pertanyaan terkait proses klaim, mohon dapat menghubungi kami melalui email <a href="mailto:klaim@binasentra.co.id">klaim@binasentra.co.id</a> atau telepon 021-22323915.</p>
+
+<div class="signature">
+  <p>Hormat Kami</p>
+  <p>PT. Binasentra Purna Insurance Broker</p>
+</div>
+
+</body>
+</html>
