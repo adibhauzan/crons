@@ -1,0 +1,30 @@
+version: "3"
+
+services:
+  app:
+    image: ${DOCKER_IMAGE}
+    container_name: ${DOCKER_CONTAINER_NAME}
+    restart: always
+    networks:
+      - shared_network
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+    environment:
+      - MODE=${MODE}
+      - APP_ORIGIN=${APP_ORIGIN}
+      - MSSQL_DB_HOST=${MSSQL_DB_HOST}
+      - MSSQL_DB_USER=${MSSQL_DB_USER}
+      - MSSQL_SA_PASSWORD=${MSSQL_SA_PASSWORD}
+      - MSSQL_DB_NAME=${MSSQL_DB_NAME}
+      - MSSQL_DB_PORT=${MSSQL_DB_PORT}
+      - MINIO_BUCKET_NAME=${MINIO_BUCKET_NAME}
+      - MINIO_URL=${MINIO_URL}
+      - MINIO_ACCESS_KEY=${MINIO_ACCESS_KEY}
+      - MINIO_SECRET_KEY=${MINIO_SECRET_KEY}
+      - RABBITMQ_HOST=${RABBITMQ_HOST}
+      - RABBITMQ_USER=${RABBITMQ_USER}
+      - RABBITMQ_PASS=${RABBITMQ_PASS}
+
+networks:
+  shared_network:
+    external: true
