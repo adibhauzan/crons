@@ -28,7 +28,7 @@ func NewClaimBlastingHandler(claimBlastingService services.ClaimBlastingService,
 }
 
 func (h *claimBlastingHandler) RegisterJob() error {
-	_, err := h.cron.AddFunc("0 5 22 * * *", func() {
+	_, err := h.cron.AddFunc("0 0 20 * * *", func() {
 		h.logger.Info("Starting Blasting Email Claim Cron")
 		if err := h.claimBlastingService.BlastingEmailClaim(context.Background()); err != nil {
 			h.logger.Errorf("Failed to blast email claims: %v", err)
